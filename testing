@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Auth Page</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('https://4kwallpapers.com/images/walls/thumbs_3t/20921.jpg') no-repeat center center/cover;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .container {
+            background: rgba(75, 0, 130, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 1s ease-in-out;
+            z-index: 2;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.8);
+            color: #4b0082;
+            font-size: 16px;
+        }
+        .btn {
+            background: #ff66b2;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #ff3385;
+        }
+        .toggle {
+            color: #ffccff;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .link {
+            color: #ffccff;
+            text-decoration: none;
+            font-size: 14px;
+            display: block;
+            margin-top: 10px;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+        .animated-symbols {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .symbol {
+            position: absolute;
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.5);
+            animation: float 5s linear infinite;
+        }
+        @keyframes float {
+            from { transform: translateY(100vh); opacity: 0; }
+            to { transform: translateY(-10vh); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-symbols"></div>
+    <div class="container" id="authContainer">
+        <h2 id="formTitle">Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button class="btn" onclick="toggleAuth()">Sign In</button>
+        <p class="toggle" onclick="switchForm()">Don't have an account? Sign Up</p>
+        <a href="#" class="link">Forgot your password?</a>
+    </div>
+    <script>
+        function switchForm() {
+            const title = document.getElementById('formTitle');
+            const button = document.querySelector('.btn');
+            const toggleText = document.querySelector('.toggle');
+
+            if (title.innerText === "Login") {
+                title.innerText = "Sign Up";
+                button.innerText = "Register";
+                toggleText.innerText = "Already have an account? Login";
+            } else {
+                title.innerText = "Login";
+                button.innerText = "Sign In";
+                toggleText.innerText = "Don't have an account? Sign Up";
+            }
+        }
+        function createSymbols() {
+            const symbols = ['★', '☆', '✦', '✧', '❀', '❃', '✿', '❁'];
+            const container = document.querySelector('.animated-symbols');
+            for (let i = 0; i < 20; i++) {
+                const symbol = document.createElement('div');
+                symbol.classList.add('symbol');
+                symbol.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                symbol.style.left = Math.random() * 100 + 'vw';
+                symbol.style.animationDuration = (Math.random() * 5 + 3) + 's';
+                container.appendChild(symbol);
+            }
+        }
+        createSymbols();
+    </script>
+</body>
+</html>
+
